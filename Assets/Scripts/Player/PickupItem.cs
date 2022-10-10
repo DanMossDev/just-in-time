@@ -6,36 +6,32 @@ public class PickupItem : MonoBehaviour
 {
     [Space]
     [Header("Game Feel")]
-    [SerializeField] Vector2 dropForce;
+    [SerializeField] Vector3 dropForce;
 
     [Space]
     [Header("Transforms and Prefabs")]
     [SerializeField] Transform itemHolder;
     [SerializeField] LayerMask hitLayer;
     Rigidbody rigidBody;
-
     GameObject target;
     GameObject held;
-    
-    bool hasItem;
+
+    void Start() 
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
 
     void Update() 
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, PlayerStats.pickupRange, hitLayer, QueryTriggerInteraction.Ignore))
-        {
             target = hit.collider.gameObject;
-        }
-    }
-
-    void OnDrop()
-    {
-        
+        else target = null;
     }
 
     void OnInteract()
     {
-        if (hasItem){} //Drop();
+        if (held != null) Drop();
         else if (target != null) Pickup();
     }
 
@@ -45,5 +41,16 @@ public class PickupItem : MonoBehaviour
         target.GetComponent<Rigidbody>().detectCollisions = false;
         target.transform.parent = itemHolder;
         target.transform.localPosition = Vector3.zero;
+        held = target;
+    }
+
+    void Drop()
+    {
+        Rigidbody heldRB = held.GetComponent<Rigidbody>();
+        heldRB.isKinematic = false;
+        heldRB.detectCollisions = true;
+        heldRB.AddForce(Camera.main.transform.TransformDirection(dropForce), ForceMode.Impulse);
+        held.transform.parent = null;
+        held = null;
     }
 }
