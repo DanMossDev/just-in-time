@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class CustomerController : MonoBehaviour
 {
-    [SerializeField] Transform waitingArea;
-    [SerializeField] Transform spawnPoint;
+    Transform waitingArea;
+    Transform leavePoint;
     CustomerOrder order;
     NavMeshAgent navMeshAgent;
     CustomerState currentState;
@@ -23,7 +23,9 @@ public class CustomerController : MonoBehaviour
     void OnEnable() 
     {
         currentState = EnterState;
-        currentState.EnterState(this);
+        currentState.EnterState(this, order);
+        waitingArea = WaitingArea.waitingArea;
+        leavePoint = LeavePoint.leavePoint;
         navMeshAgent.destination = waitingArea.position;
     }
 
@@ -38,9 +40,9 @@ public class CustomerController : MonoBehaviour
 
     public void SwitchState(CustomerState state)
     {
-        if (state == LeaveState) navMeshAgent.destination = spawnPoint.position;
+        if (state == LeaveState) navMeshAgent.destination = leavePoint.position;
         currentState = state;
-        state.EnterState(this);
+        state.EnterState(this, order);
     }
 
     void OnTriggerEnter(Collider other)

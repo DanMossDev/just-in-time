@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rigidBody;
     Vector2 input;
-    float ySpeed = 0;
     bool isGrounded;
 
     void Start()

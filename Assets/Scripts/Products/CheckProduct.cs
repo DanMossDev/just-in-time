@@ -9,8 +9,7 @@ public class CheckProduct : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        print(LayerMask.NameToLayer("Interactable"));
-        if (other.gameObject.layer == LayerMask.NameToLayer("Interactable")) CheckForCustomer(other.gameObject.GetComponent<Interactable>());
+        if (other.gameObject.layer == LayerMask.NameToLayer("Interactable") || other.gameObject.layer == LayerMask.NameToLayer("HeldItem")) CheckForCustomer(other.gameObject.GetComponent<Interactable>());
     }
 
     void CheckForCustomer(Interactable item)
@@ -21,6 +20,7 @@ public class CheckProduct : MonoBehaviour
             {
                 order.gameObject.GetComponent<CustomerController>().Leave();
                 orders.Remove(order);
+                Destroy(item.gameObject);
                 break;
             }
         }

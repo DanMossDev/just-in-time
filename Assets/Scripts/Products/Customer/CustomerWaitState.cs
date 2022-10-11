@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CustomerWaitState : CustomerState
 {
-    public override void EnterState(CustomerController customer)
+    public override void EnterState(CustomerController customer, CustomerOrder order)
     {
-        Debug.Log("Wait state");
-        //Spawn a waiting bar over their head
+        order.arriveTime = Time.time;
+        order.leaveTime = order.arriveTime + GameManager.patience;
+        CheckProduct.orders.Add(order);
+        customer.GetComponentInChildren<UpdateWaitTime>().ratio = 1;
+        customer.GetComponentInChildren<TextMeshProUGUI>().text = order.order.ToString();
+
+        customer.GetComponentInChildren<Canvas>().enabled = true;
     }
     public override void UpdateState(CustomerController customer, CustomerOrder order)
     {
         float timeRemaining = order.leaveTime - Time.time;
-        if (timeRemaining < 0) customer.SwitchState(customer.GameOver);
-        //Update waiting bar to be a ratio of time remaining divided by patience
+        if (timeRemaining <= 0) {
+            customer.GetComponentInChildren<UpdateWaitTime>().ratio = 0;
+            customer.SwitchState(customer.GameOver);
+        } else customer.GetComponentInChildren<UpdateWaitTime>().ratio = timeRemaining / GameManager.patience;
     }
     public override void OnTriggerEnter(CustomerController customer, Collider other)
     {

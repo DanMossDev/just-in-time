@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CustomerEnteringState : CustomerState
 {
-    public override void EnterState(CustomerController customer)
+    public override void EnterState(CustomerController customer, CustomerOrder order)
     {
-        Debug.Log("Enter state");
+        customer.GetComponentInChildren<Canvas>().enabled = false;
     }
     public override void UpdateState(CustomerController customer, CustomerOrder order)
     {

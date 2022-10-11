@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CustomerLeaveState : CustomerState
 {
-    public override void EnterState(CustomerController customer)
+    public delegate void CustomerServed();
+    public static event CustomerServed OnCustomerServed;
+    public override void EnterState(CustomerController customer, CustomerOrder order)
     {
-        Debug.Log("Leave state");
+        customer.GetComponentInChildren<Canvas>().enabled = false;
+        OnCustomerServed();
     }
     public override void UpdateState(CustomerController customer, CustomerOrder order)
     {

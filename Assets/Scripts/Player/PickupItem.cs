@@ -38,7 +38,7 @@ public class PickupItem : MonoBehaviour
     void Pickup()
     {
         target.GetComponent<Rigidbody>().isKinematic = true;
-        target.GetComponent<Rigidbody>().detectCollisions = false;
+        target.layer = LayerMask.NameToLayer("HeldItem");
         target.transform.parent = itemHolder;
         target.transform.localPosition = Vector3.zero;
         held = target;
@@ -48,7 +48,7 @@ public class PickupItem : MonoBehaviour
     {
         Rigidbody heldRB = held.GetComponent<Rigidbody>();
         heldRB.isKinematic = false;
-        heldRB.detectCollisions = true;
+        held.layer = LayerMask.NameToLayer("Interactable");
         heldRB.AddForce(Camera.main.transform.TransformDirection(dropForce), ForceMode.Impulse);
         held.transform.parent = null;
         held = null;
