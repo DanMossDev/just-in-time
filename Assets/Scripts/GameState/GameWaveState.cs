@@ -8,10 +8,13 @@ public class GameWaveState : GameState
     {
         manager.servedCustomers = 0;
         manager.i = 0;
-        manager.totalCustomers = (int)manager.waveProperties[manager.currentWave].x;
-        GameManager.patience = manager.waveProperties[manager.currentWave].z;
+        manager.totalCustomers = (int)manager.waveProperties[GameManager.currentWave].x;
+        GameManager.patience = manager.waveProperties[GameManager.currentWave].z;
         manager.BeginWave();
         //update display to show current wave
     }
-    public override void UpdateState(GameManager manager) {}
+    public override void UpdateState(GameManager manager) 
+    {
+        GameManager.timeRemaining -= Time.deltaTime;
+    }
 }

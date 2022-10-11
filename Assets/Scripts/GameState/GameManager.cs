@@ -14,13 +14,15 @@ public class GameManager : MonoBehaviour
     [Tooltip("The prefabs of the customers")]
     [SerializeField] GameObject[] customers;
 
-    [HideInInspector] public int currentWave = 0;
-    [HideInInspector] public static float patience = 60;
+    public static int currentWave = 0;
+    public static float patience = 60;
+    public static float customersRemaining = 0;
     [HideInInspector] public int servedCustomers = 0; //Customers served
     [HideInInspector] public int spawnedCustomers = 0; //Total spawned this round
     [HideInInspector] public int totalCustomers = 0; //Total needed to be spawned this round
-    [HideInInspector] public int currentCustomers = 0; //Customers still waiting
+    [HideInInspector] public int currentCustomers = 0; //Customers still waiting in the store
     [HideInInspector] public int i = 0;
+    [HideInInspector] public static float timeRemaining = 120;
 
     //States
     public GameState currentState;
@@ -47,7 +49,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        print(currentState.ToString());
         currentState.UpdateState(this);
     }
 
@@ -66,13 +67,16 @@ public class GameManager : MonoBehaviour
     {
         servedCustomers++;
         currentCustomers--;
-
+        customersRemaining--;
         if (servedCustomers == totalCustomers) ChangeState(postWave);
     }
 
     public void BeginWave()
     {
+        timeRemaining = 120;
+        customersRemaining = totalCustomers;
         StartCoroutine(SpawnCustomers((int)waveProperties[currentWave].x, waveProperties[currentWave].y));
+        currentWave++;
     }
 
     IEnumerator SpawnCustomers(int count, float delay)
