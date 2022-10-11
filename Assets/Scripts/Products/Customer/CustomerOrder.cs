@@ -9,7 +9,7 @@ public class CustomerOrder : MonoBehaviour
     [HideInInspector] public Items order;
 
     [HideInInspector] public float arriveTime;
-    float leaveTime;
+    [HideInInspector] public float leaveTime;
 
     void OnEnable() 
     {
