@@ -26,7 +26,8 @@ public class CustomerController : MonoBehaviour
         currentState.EnterState(this, order);
         waitingArea = WaitingArea.waitingArea;
         leavePoint = LeavePoint.leavePoint;
-        navMeshAgent.destination = waitingArea.position;
+        Vector3 range = waitingArea.GetComponent<BoxCollider>().size;
+        navMeshAgent.destination = waitingArea.position + new Vector3(Random.Range(-range.x, range.x), 0, Random.Range(-range.z, range.z));
     }
 
     void Update()
