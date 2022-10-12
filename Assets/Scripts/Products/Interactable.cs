@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
 }
 
 public enum Items {
-    TV,
+    Computer,
     Beans,
     Headphones,
     Box

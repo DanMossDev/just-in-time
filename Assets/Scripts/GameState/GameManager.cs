@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentCustomers < maxCustomers) 
             {
-                Instantiate(customers[Random.Range(0, customers.Length - 1)]);
+                Instantiate(customers[Random.Range(0, customers.Length - 1)], transform);
                 currentCustomers++;
                 i++;
              yield return new WaitForSecondsRealtime(delay);
