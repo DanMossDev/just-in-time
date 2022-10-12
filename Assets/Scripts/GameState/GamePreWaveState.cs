@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GamePreWaveState : GameState
 {
-    public override void EnterState(GameManager manager) {}
+    public override void EnterState(GameManager manager) 
+    {
+        manager.OnStart();
+    }
     public override void UpdateState(GameManager manager) {}
 }

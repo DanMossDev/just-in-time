@@ -6,7 +6,7 @@ public class CustomerGameOverState : CustomerState
 {
     public override void EnterState(CustomerController customer, CustomerOrder order)
     {
-        //Go to a game over screen
+        GameManager.Instance.ChangeState(GameManager.Instance.gameOver);
     }
     public override void UpdateState(CustomerController customer, CustomerOrder order)
     {

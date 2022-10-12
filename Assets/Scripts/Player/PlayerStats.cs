@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public static float moveSpeed = 10;
-    public static float jumpHeight = 5;
-    public static float pickupRange = 4;
+    public static float moveSpeed = 8;
+    public static float jumpHeight = 3;
+    public static float pickupRange = 3;
 }

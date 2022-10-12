@@ -8,7 +8,7 @@ public class CustomerWaitState : CustomerState
     public override void EnterState(CustomerController customer, CustomerOrder order)
     {
         order.arriveTime = Time.time;
-        order.leaveTime = order.arriveTime + GameManager.patience;
+        order.leaveTime = order.arriveTime + GameManager.Instance.patience;
         CheckProduct.orders.Add(order);
         customer.GetComponentInChildren<UpdateWaitTime>().ratio = 1;
         customer.GetComponentInChildren<TextMeshProUGUI>().text = order.order.ToString();
@@ -21,7 +21,7 @@ public class CustomerWaitState : CustomerState
         if (timeRemaining <= 0) {
             customer.GetComponentInChildren<UpdateWaitTime>().ratio = 0;
             customer.SwitchState(customer.GameOver);
-        } else customer.GetComponentInChildren<UpdateWaitTime>().ratio = timeRemaining / GameManager.patience;
+        } else customer.GetComponentInChildren<UpdateWaitTime>().ratio = timeRemaining / GameManager.Instance.patience;
     }
     public override void OnTriggerEnter(CustomerController customer, Collider other)
     {

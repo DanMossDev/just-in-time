@@ -13,16 +13,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] int maxCustomers = 3;
     [Tooltip("The prefabs of the customers")]
     [SerializeField] GameObject[] customers;
+    [Space]
+    [Header("Prefabs for states")]
+    public GameObject gameOverScreen;
+    public GameObject postWaveScreen;
 
-    public static int currentWave = 0;
-    public static float patience = 60;
-    public static float customersRemaining = 0;
+    [HideInInspector] public int currentWave = 0;
+    [HideInInspector] public float patience;
+    [HideInInspector] public float customersRemaining = 0;
     [HideInInspector] public int servedCustomers = 0; //Customers served
     [HideInInspector] public int spawnedCustomers = 0; //Total spawned this round
     [HideInInspector] public int totalCustomers = 0; //Total needed to be spawned this round
     [HideInInspector] public int currentCustomers = 0; //Customers still waiting in the store
     [HideInInspector] public int i = 0;
-    [HideInInspector] public static float timeRemaining = 120;
+    [HideInInspector] public float timeRemaining = 120;
 
     //States
     public GameState currentState;
@@ -31,12 +35,24 @@ public class GameManager : MonoBehaviour
     public GamePostWaveState postWave = new GamePostWaveState();
     public GameOverState gameOver = new GameOverState();
 
+    //Singleton
+    public static GameManager Instance {get; private set;}
+
+    void Awake() {
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
+
     void Start()
     {
         currentState = preWave;
         currentState.EnterState(this);
-
-        Invoke("OnStart", 5);
     }
 
     void OnEnable() {
@@ -58,9 +74,9 @@ public class GameManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    void OnStart()
+    public void OnStart()
     {
-        if (currentState == preWave) ChangeState(wave);
+        StartCoroutine(WaveCountDown());
     }
 
     void CustomerServed()
@@ -77,6 +93,12 @@ public class GameManager : MonoBehaviour
         customersRemaining = totalCustomers;
         StartCoroutine(SpawnCustomers((int)waveProperties[currentWave].x, waveProperties[currentWave].y));
         currentWave++;
+    }
+
+    IEnumerator WaveCountDown()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        if (currentState == preWave) ChangeState(wave);
     }
 
     IEnumerator SpawnCustomers(int count, float delay)

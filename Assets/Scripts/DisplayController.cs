@@ -12,9 +12,9 @@ public class DisplayController : MonoBehaviour
     
     void Update()
     {
-        customersRemaining.text = "Customers Remaining: " + GameManager.customersRemaining;
-        waveCounter.text = "Current Wave: " + GameManager.currentWave;
-        timer.text = "" + (int)GameManager.timeRemaining;
+        customersRemaining.text = "Customers Remaining: " + GameManager.Instance.customersRemaining;
+        waveCounter.text = "Current Wave: " + GameManager.Instance.currentWave;
+        timer.text = "" + (int)GameManager.Instance.timeRemaining;
     }
     
 }

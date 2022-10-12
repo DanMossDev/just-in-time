@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(InputValue value)
     {
         input = value.Get<Vector2>();
+
+        print(PlayerStats.moveSpeed);
     }
 
     void OnJump()
