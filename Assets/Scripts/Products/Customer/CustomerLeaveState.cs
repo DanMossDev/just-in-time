@@ -18,5 +18,7 @@ public class CustomerLeaveState : CustomerState
     public override void OnTriggerEnter(CustomerController customer, Collider other)
     {
         
+        customer.gameObject.SetActive(false);
+        CustomerPool.customers.Add(customer.gameObject);
     }
 }

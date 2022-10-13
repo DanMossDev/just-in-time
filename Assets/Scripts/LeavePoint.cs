@@ -6,7 +6,7 @@ public class LeavePoint : MonoBehaviour
 {
     public static Transform leavePoint;
 
-    private void Start() {
+    private void Awake() {
         leavePoint = transform;
     }
 }

@@ -8,9 +8,10 @@ public class PostWaveMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI upgrade1;
     [SerializeField] TextMeshProUGUI upgrade2;
     enum Upgrades {
-        IncreaseSpeed,
-        IncreaseJumpHeight,
-        IncreasePickupRange
+        DoubleSpeed,
+        DoubleJumpHeight,
+        OrderTablet,
+        OrderMoreStock
     }
     void OnEnable()
     {
@@ -39,19 +40,29 @@ public class PostWaveMenu : MonoBehaviour
         GoToPreWave();
     }
 
-    void IncreaseSpeed()
+    void DoubleSpeed()
     {
         PlayerStats.moveSpeed += 1;
     }
 
-    void IncreaseJumpHeight()
+    void DoubleJumpHeight()
     {
         PlayerStats.jumpHeight += 1;
     }
 
-    void IncreasePickupRange()
+    // void IncreasePickupRange()
+    // {
+    //     PlayerStats.pickupRange += 1;
+    // }
+
+    void OrderTablet()
     {
-        PlayerStats.pickupRange += 1;
+        //Gain a UI screen which shows currently waiting orders and their time remaining
+    }
+
+    void OrderMoreStock()
+    {
+        ObjectPool.Instance.BeginRestock();
     }
 
     void GoToPreWave()

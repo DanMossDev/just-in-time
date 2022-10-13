@@ -6,7 +6,7 @@ public class WaitingArea : MonoBehaviour
 {
     public static Transform waitingArea;
 
-    private void Start() {
+    private void Awake() {
         waitingArea = transform;
     }
 }

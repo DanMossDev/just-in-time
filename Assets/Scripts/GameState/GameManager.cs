@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     public Vector3[] waveProperties;
     [Tooltip("Maximum number of customers that can be waiting at a given time")]
     [SerializeField] int maxCustomers = 3;
-    [Tooltip("The prefabs of the customers")]
-    [SerializeField] GameObject[] customers;
     [Space]
     [Header("Prefabs for states")]
     public GameObject gameOverScreen;
@@ -107,7 +105,10 @@ public class GameManager : MonoBehaviour
         {
             if (currentCustomers < maxCustomers) 
             {
-                Instantiate(customers[Random.Range(0, customers.Length - 1)], transform);
+                GameObject customer = CustomerPool.customers[Random.Range(0, CustomerPool.customers.Count)];
+                customer.transform.position = transform.position;
+                customer.SetActive(true);
+                CustomerPool.customers.Remove(customer);
                 currentCustomers++;
                 i++;
              yield return new WaitForSecondsRealtime(delay);

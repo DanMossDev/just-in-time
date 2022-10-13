@@ -20,7 +20,8 @@ public class CheckProduct : MonoBehaviour
             {
                 order.gameObject.GetComponent<CustomerController>().Leave();
                 orders.Remove(order);
-                Destroy(item.gameObject);
+                item.gameObject.SetActive(false);
+                ObjectPool.Instance.itemList.Add(item.gameObject);
                 break;
             }
         }
