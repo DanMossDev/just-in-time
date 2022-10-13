@@ -7,6 +7,7 @@ public class NavigationManager : MonoBehaviour
 {
     public static NavigationManager Instance {get; private set;}
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] GameObject pauseMenu;
 
     void Awake() {
         if (Instance != null && Instance != this) 
@@ -32,5 +33,10 @@ public class NavigationManager : MonoBehaviour
         Time.timeScale = 1;
         playerInput.ActivateInput();
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void OnPause()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
     }
 }

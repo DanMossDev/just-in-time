@@ -5,13 +5,13 @@ using UnityEngine;
 public class CustomerPool : MonoBehaviour
 {
     [SerializeField] GameObject[] customerPrefabs;
-    [SerializeField] int numOfCustomers;
+    [SerializeField] int totalCustomersInPool;
 
     public static List<GameObject> customers = new List<GameObject>();
 
     void Start()
     {
-        for (int i = 0; i < numOfCustomers; i++)
+        for (int i = 0; i < totalCustomersInPool; i++)
         {
             GameObject newCustomer = Instantiate(customerPrefabs[Random.Range(0, customerPrefabs.Length - 1)], transform);
             newCustomer.SetActive(false);
