@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5975096760187941520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5975096760187941521}
+  - component: {fileID: 5975096760187941534}
+  - component: {fileID: 5975096760187941535}
+  - component: {fileID: 5975096760187941532}
+  - component: {fileID: 5975096760187941533}
+  m_Layer: 0
+  m_Name: Game Manager_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5975096760187941521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975096760187941520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.1, y: 0, z: -48.00096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5975096760187941534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975096760187941520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef03538e384dab42b25180a7a69718c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveProperties:
+  - {x: 5, y: 15, z: 60}
+  - {x: 7, y: 10, z: 60}
+  - {x: 9, y: 8, z: 60}
+  - {x: 11, y: 5, z: 60}
+  - {x: 8, y: 15, z: 45}
+  - {x: 10, y: 10, z: 45}
+  - {x: 12, y: 8, z: 45}
+  - {x: 14, y: 5, z: 45}
+  - {x: 11, y: 15, z: 30}
+  - {x: 13, y: 15, z: 30}
+  - {x: 15, y: 15, z: 30}
+  - {x: 17, y: 15, z: 30}
+  maxCustomers: 7
+  gameOverScreen: {fileID: 0}
+  postWaveScreen: {fileID: 0}
+  currentWave: 0
+  patience: 5
+  customersRemaining: 0
+  servedCustomers: 0
+  spawnedCustomers: 0
+  totalCustomers: 0
+  currentCustomers: 0
+  i: 0
+  timeRemaining: 120
+--- !u!114 &5975096760187941535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975096760187941520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559bf95c92be5bc468666e2683d06e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5975096760187941532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975096760187941520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d02405082f782646a2d4e93eb1fa141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customerPrefabs:
+  - {fileID: 6835252954971676472, guid: 218906b90928f3441bd9db37be0332bf, type: 3}
+  totalCustomersInPool: 15
+--- !u!114 &5975096760187941533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975096760187941520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221dc6189c1c2a34da7b78bbb3d62122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 8433500183477387009, guid: 22c7e8628631d0f4a913c17adf6be6a9, type: 3}
+  - {fileID: 8676509917743844288, guid: 7e4104830d4e9f74ca5158913720e009, type: 3}
+  - {fileID: 4232929304508094298, guid: 7566bd0efdde2544ca7a98a95b15cb13, type: 3}
+  itemCounts: 320000003200000032000000
+  itemList: []
