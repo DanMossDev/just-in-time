@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CheckProduct : MonoBehaviour
 {
+    [SerializeField] AudioClip[] correctOrder;
+    [SerializeField] AudioClip[] wrongOrder;
     public List<CustomerOrder> orders = new List<CustomerOrder>();
 
     public static CheckProduct Instance {get; private set;}
@@ -31,8 +33,10 @@ public class CheckProduct : MonoBehaviour
                 item.gameObject.SetActive(false);
                 ObjectPool.Instance.itemList.Add(item.gameObject);
                 if (PlayerStats.Instance.hasTablet) ShowOrders.Instance.CheckOrders();
-                break;
+                SFXController.Instance.PlaySFX(correctOrder);
+                return;
             }
         }
+        SFXController.Instance.PlaySFX(wrongOrder);
     }
 }

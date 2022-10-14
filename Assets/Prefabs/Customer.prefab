@@ -416,6 +416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d0731343d257a43b2fcc764fa2d2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderPlaced:
+  - {fileID: 8300000, guid: 7395c52eb037fda4098153be3f2f4b56, type: 3}
+  - {fileID: 8300000, guid: 4718db231cbb8df448217b2d91028096, type: 3}
 --- !u!114 &6835252954971676473
 MonoBehaviour:
   m_ObjectHideFlags: 0

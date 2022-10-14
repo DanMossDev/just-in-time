@@ -7,10 +7,13 @@ using TMPro;
 public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI waveCount;
+    [SerializeField] AudioClip[] gameOverSound;
+    AudioClip[] gameOver;
     void OnEnable()
     {
         NavigationManager.Instance.ShowMouse();
         waveCount.text += GameManager.Instance.currentWave;
+        SFXController.Instance.PlaySFX(gameOverSound);
     }
     public void ReturnToMenu()
     {

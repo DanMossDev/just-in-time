@@ -7,8 +7,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Space]
-    [Header("Movement Options")]
-
+    [Header("Audio Options")]
+    [SerializeField] float timeBetweenSteps;
+    [SerializeField] AudioClip[] footsteps;
+    [SerializeField] AudioClip[] jump;
+    [SerializeField] AudioClip[] land;
     [Space]
     [Header("Ground Check")]
     [Tooltip("Point from which to check for ground collisions")]
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool isCrouching = false;
     float currentMoveSpeed;
+    float lastStep = 0;
 
     void Start()
     {
@@ -37,12 +41,17 @@ public class PlayerMovement : MonoBehaviour
         currentMoveSpeed = PlayerStats.Instance.moveSpeed;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(feet.position, groundDistance, ground);
         Vector3 movement = (transform.right * input.x + transform.forward * input.y) * currentMoveSpeed;
         movement += new Vector3(0, rigidBody.velocity.y, 0);
         rigidBody.velocity = movement;
+        if (isGrounded && (movement.x != 0 || movement.z != 0 || movement.y < -1) && Time.time - lastStep > timeBetweenSteps / currentMoveSpeed)
+        {
+            SFXController.Instance.PlaySFX(footsteps, 0.5f);
+            lastStep = Time.time;
+        }
     }
 
     void OnMove(InputValue value)
@@ -52,7 +61,10 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump()
     {
-        if (isGrounded) rigidBody.velocity = new Vector3(rigidBody.velocity.x, Mathf.Sqrt((PlayerStats.Instance.jumpHeight + 0.2f) * -2 * Physics.gravity.y), rigidBody.velocity.z);
+        if (isGrounded) {
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, Mathf.Sqrt((PlayerStats.Instance.jumpHeight + 0.2f) * -2 * Physics.gravity.y), rigidBody.velocity.z);
+            SFXController.Instance.PlaySFX(jump);
+        }
     }
 
     void OnJumpRelease()

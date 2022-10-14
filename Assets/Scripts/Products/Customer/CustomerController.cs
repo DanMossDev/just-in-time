@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class CustomerController : MonoBehaviour
 {
+    [SerializeField] AudioClip[] orderPlaced;
     Transform waitingArea;
     Transform leavePoint;
     CustomerOrder order;
@@ -42,6 +43,7 @@ public class CustomerController : MonoBehaviour
     public void SwitchState(CustomerState state)
     {
         if (state == LeaveState) navMeshAgent.destination = leavePoint.position;
+        if (state == WaitState) SFXController.Instance.PlaySFX(orderPlaced, 0.7f);
         currentState = state;
         state.EnterState(this, order);
     }

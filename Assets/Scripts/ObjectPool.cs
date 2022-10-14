@@ -14,15 +14,10 @@ public class ObjectPool : MonoBehaviour
 
     public static ObjectPool Instance {get; private set;}
 
-    void Awake() {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+    void Awake() 
+    {
+        if (Instance != null && Instance != this)  Destroy(this); 
+        else Instance = this; 
     }
 
     void Start()

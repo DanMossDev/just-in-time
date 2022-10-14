@@ -5,6 +5,7 @@ using TMPro;
 
 public class PostWaveMenu : MonoBehaviour
 {
+    [SerializeField] AudioClip[] upgradeSound;
     [SerializeField] TextMeshProUGUI upgrade1;
     [SerializeField] TextMeshProUGUI upgrade2;
     enum Upgrades {
@@ -125,6 +126,7 @@ public class PostWaveMenu : MonoBehaviour
 
     void GoToPreWave()
     {
+        SFXController.Instance.PlaySFX(upgradeSound);
         this.gameObject.SetActive(false);
         GameManager.Instance.ChangeState(GameManager.Instance.preWave);
     }

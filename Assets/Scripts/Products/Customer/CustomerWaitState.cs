@@ -13,7 +13,6 @@ public class CustomerWaitState : CustomerState
         if (PlayerStats.Instance.hasTablet) ShowOrders.Instance.CheckOrders();
         customer.GetComponentInChildren<UpdateWaitTime>().ratio = 1;
         customer.GetComponentInChildren<TextMeshProUGUI>().text = order.order.ToString();
-
         customer.GetComponentInChildren<Canvas>().enabled = true;
     }
     public override void UpdateState(CustomerController customer, CustomerOrder order)
