@@ -19,6 +19,6 @@ public class CustomerLeaveState : CustomerState
     {
         
         customer.gameObject.SetActive(false);
-        CustomerPool.customers.Add(customer.gameObject);
+        CustomerPool.Instance.customers.Add(customer.gameObject);
     }
 }

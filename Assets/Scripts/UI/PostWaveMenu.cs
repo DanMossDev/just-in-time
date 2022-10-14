@@ -9,12 +9,12 @@ public class PostWaveMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI upgrade2;
     enum Upgrades {
         IncreaseSpeed,
-        DoubleSpeed,
+        UnlockSprint,
         DoubleJumpHeight,
         OrderTablet,
         OrderMoreStock,
         DoPilates,
-        HireCoworker,
+        //HireCoworker,
         BecomeAmbidextrous
     }
 
@@ -41,12 +41,12 @@ public class PostWaveMenu : MonoBehaviour
         {
             case "IncreaseSpeed":
                 return $"Increase Speed:{System.Environment.NewLine}All the cardio is paying off!";
-            case "DoubleSpeed":
-                return $"Double Speed:{System.Environment.NewLine}It's probably safe...";
+            case "UnlockSprint":
+                return $"Unlock Sprint:{System.Environment.NewLine}Gotta go fast";
             case "DoubleJumpHeight":
                 return $"Double Jump Height:{System.Environment.NewLine}Just don't question it";
             case "OrderTablet":
-                return $"Buy a Tablet:{System.Environment.NewLine}View orders from far away";
+                return $"Buy a Tablet:{System.Environment.NewLine}Does it have Flappy Bird installed?";
             case "OrderMoreStock":
                 return $"Order More Stock:{System.Environment.NewLine}Isn't this someone else's job?";
             case "DoPilates":
@@ -79,24 +79,24 @@ public class PostWaveMenu : MonoBehaviour
 
     void IncreaseSpeed()
     {
-        PlayerStats.moveSpeed += 2;
+        PlayerStats.Instance.moveSpeed += 2;
     }
 
-    void DoubleSpeed()
+    void UnlockSprint()
     {
-        PlayerStats.moveSpeed *= 2;
-        AlreadyUpgraded.Add("DoubleSpeed");
+        PlayerStats.Instance.hasSprint = true;
+        AlreadyUpgraded.Add("UnlockSprint");
     }
 
     void DoubleJumpHeight()
     {
-        PlayerStats.jumpHeight *= 2;
+        PlayerStats.Instance.jumpHeight *= 2;
         AlreadyUpgraded.Add("DoubleJumpHeight");
     }
 
     void OrderTablet()
     {
-        //Gain a UI screen which shows currently waiting orders and their time remaining
+        PlayerStats.Instance.hasTablet = true;
         AlreadyUpgraded.Add("OrderTablet");
     }
 
@@ -107,7 +107,7 @@ public class PostWaveMenu : MonoBehaviour
 
     void DoPilates()
     {
-        PlayerStats.hasCrouch = true;
+        PlayerStats.Instance.hasCrouch = true;
         AlreadyUpgraded.Add("DoPilates");
     }
 
@@ -119,7 +119,7 @@ public class PostWaveMenu : MonoBehaviour
 
     void BecomeAmbidextrous()
     {
-        PlayerStats.hasTwoHands = true;
+        PlayerStats.Instance.hasTwoHands = true;
         AlreadyUpgraded.Add("BecomeAmbidextrous");
     }
 

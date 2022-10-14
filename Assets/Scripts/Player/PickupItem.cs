@@ -26,14 +26,14 @@ public class PickupItem : MonoBehaviour
     void Update() 
     {
         RaycastHit hit;
-        if (Physics.SphereCast(Camera.main.transform.position, 0.5f, Camera.main.transform.forward, out hit, PlayerStats.pickupRange, hitLayer, QueryTriggerInteraction.Ignore))
+        if (Physics.SphereCast(Camera.main.transform.position, 0.5f, Camera.main.transform.forward, out hit, PlayerStats.Instance.pickupRange, hitLayer, QueryTriggerInteraction.Ignore))
             target = hit.collider.gameObject;
         else target = null;
     }
 
     void OnInteract()
     {
-        if (PlayerStats.hasTwoHands)
+        if (PlayerStats.Instance.hasTwoHands)
         {
             if (heldRightHand != null && heldLeftHand != null) Drop(true);
             else if (target != null) Pickup();

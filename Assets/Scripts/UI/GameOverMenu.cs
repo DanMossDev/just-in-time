@@ -14,7 +14,7 @@ public class GameOverMenu : MonoBehaviour
     }
     public void ReturnToMenu()
     {
-
+        SceneManager.LoadScene(0);
     }
 
     public void PlayAgain()

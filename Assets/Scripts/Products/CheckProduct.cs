@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class CheckProduct : MonoBehaviour
 {
-    public static List<CustomerOrder> orders = new List<CustomerOrder>();
+    public List<CustomerOrder> orders = new List<CustomerOrder>();
+
+    public static CheckProduct Instance {get; private set;}
+
+    private void Awake() 
+    {
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this; 
+    }
 
     void OnTriggerEnter(Collider other) 
     {
@@ -22,6 +30,7 @@ public class CheckProduct : MonoBehaviour
                 orders.Remove(order);
                 item.gameObject.SetActive(false);
                 ObjectPool.Instance.itemList.Add(item.gameObject);
+                if (PlayerStats.Instance.hasTablet) ShowOrders.Instance.CheckOrders();
                 break;
             }
         }

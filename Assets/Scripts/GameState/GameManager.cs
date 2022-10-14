@@ -37,14 +37,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {get; private set;}
 
     void Awake() {
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this;
     }
 
     void Start()
@@ -105,13 +99,13 @@ public class GameManager : MonoBehaviour
         {
             if (currentCustomers < maxCustomers) 
             {
-                GameObject customer = CustomerPool.customers[Random.Range(0, CustomerPool.customers.Count)];
+                GameObject customer = CustomerPool.Instance.customers[Random.Range(0, CustomerPool.Instance.customers.Count)];
                 customer.transform.position = transform.position;
                 customer.SetActive(true);
-                CustomerPool.customers.Remove(customer);
+                CustomerPool.Instance.customers.Remove(customer);
                 currentCustomers++;
                 i++;
-             yield return new WaitForSecondsRealtime(delay);
+                yield return new WaitForSecondsRealtime(delay);
             } else yield return new WaitForSecondsRealtime(1);
         }
     }

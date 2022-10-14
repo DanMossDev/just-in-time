@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PauseTransition : MonoBehaviour
 {
+    [SerializeField] float startPoint = -1350;
+    [SerializeField] float endPoint = -250;
+    float currentPoint;
     RectTransform UItransform;
     void Awake()
     {
@@ -12,17 +15,19 @@ public class PauseTransition : MonoBehaviour
 
     void OnEnable()
     {
-        UItransform.transform.localPosition = new Vector3(0, -1350, 0);
+        currentPoint = startPoint;
+        UItransform.transform.localPosition = new Vector3(UItransform.transform.localPosition.x, currentPoint, UItransform.transform.localPosition.z);
         StartCoroutine(FlyUp());
     }
 
     IEnumerator FlyUp()
     {
-        while (UItransform.transform.localPosition.y * 0.9f < -250) 
+        while (UItransform.transform.localPosition.y * 0.9f < endPoint) 
         {
-            UItransform.transform.localPosition *= 0.9f;
+            currentPoint *= 0.9f;
+            UItransform.transform.localPosition = new Vector3(UItransform.transform.localPosition.x, currentPoint, UItransform.transform.localPosition.z);
             yield return new WaitForSecondsRealtime(0.02f);
         }
-        UItransform.transform.localPosition = new Vector3(0, -250, 0);
+        UItransform.transform.localPosition = new Vector3(UItransform.transform.localPosition.x, endPoint, UItransform.transform.localPosition.z);
     }
 }

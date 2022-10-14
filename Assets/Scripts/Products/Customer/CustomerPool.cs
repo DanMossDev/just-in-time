@@ -6,8 +6,15 @@ public class CustomerPool : MonoBehaviour
 {
     [SerializeField] GameObject[] customerPrefabs;
     [SerializeField] int totalCustomersInPool;
+    [HideInInspector] public List<GameObject> customers = new List<GameObject>();
+    public static CustomerPool Instance {get; private set;}
 
-    public static List<GameObject> customers = new List<GameObject>();
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this;
+    }
 
     void Start()
     {

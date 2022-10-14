@@ -28,17 +28,19 @@ public class PlayerMovement : MonoBehaviour
     Vector2 input;
     bool isGrounded;
     bool isCrouching = false;
+    float currentMoveSpeed;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        currentMoveSpeed = PlayerStats.Instance.moveSpeed;
     }
 
     void Update()
     {
         isGrounded = Physics.CheckSphere(feet.position, groundDistance, ground);
-        Vector3 movement = (transform.right * input.x + transform.forward * input.y) * PlayerStats.moveSpeed;
+        Vector3 movement = (transform.right * input.x + transform.forward * input.y) * currentMoveSpeed;
         movement += new Vector3(0, rigidBody.velocity.y, 0);
         rigidBody.velocity = movement;
     }
@@ -50,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump()
     {
-        if (isGrounded) rigidBody.velocity = new Vector3(rigidBody.velocity.x, Mathf.Sqrt((PlayerStats.jumpHeight + 0.2f) * -2 * Physics.gravity.y), rigidBody.velocity.z);
+        if (isGrounded) rigidBody.velocity = new Vector3(rigidBody.velocity.x, Mathf.Sqrt((PlayerStats.Instance.jumpHeight + 0.2f) * -2 * Physics.gravity.y), rigidBody.velocity.z);
     }
 
     void OnJumpRelease()
@@ -60,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCrouch(InputValue action)
     {
-        if (!PlayerStats.hasCrouch) return;
+        if (!PlayerStats.Instance.hasCrouch) return;
         bool isPressed = (action.Get().ToString() == "1");
         if (isPressed && !isCrouching) Crouch();
         if (!isPressed && isCrouching) StandUp();
@@ -76,5 +78,13 @@ public class PlayerMovement : MonoBehaviour
     {
         capsuleCollider.height *= 2;
         isCrouching = false;
+    }
+
+    void OnSprint(InputValue action)
+    {
+        if (!PlayerStats.Instance.hasSprint) return;
+        bool isPressed = (action.Get().ToString() == "1");
+        if (isPressed) currentMoveSpeed = PlayerStats.Instance.moveSpeed * 2;
+        else currentMoveSpeed = PlayerStats.Instance.moveSpeed;
     }
 }

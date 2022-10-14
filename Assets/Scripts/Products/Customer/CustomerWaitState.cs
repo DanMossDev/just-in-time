@@ -9,7 +9,8 @@ public class CustomerWaitState : CustomerState
     {
         order.arriveTime = Time.time;
         order.leaveTime = order.arriveTime + GameManager.Instance.patience;
-        CheckProduct.orders.Add(order);
+        CheckProduct.Instance.orders.Add(order);
+        if (PlayerStats.Instance.hasTablet) ShowOrders.Instance.CheckOrders();
         customer.GetComponentInChildren<UpdateWaitTime>().ratio = 1;
         customer.GetComponentInChildren<TextMeshProUGUI>().text = order.order.ToString();
 
