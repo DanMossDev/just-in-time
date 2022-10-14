@@ -14,7 +14,8 @@ public class PostWaveMenu : MonoBehaviour
         OrderTablet,
         OrderMoreStock,
         DoPilates,
-        HireCoworker
+        HireCoworker,
+        BecomeAmbidextrous
     }
 
     List<string> AlreadyUpgraded = new List<string>();
@@ -38,7 +39,7 @@ public class PostWaveMenu : MonoBehaviour
     {
         switch(choice)
         {
-            case "Increase Speed":
+            case "IncreaseSpeed":
                 return $"Increase Speed:{System.Environment.NewLine}All the cardio is paying off!";
             case "DoubleSpeed":
                 return $"Double Speed:{System.Environment.NewLine}It's probably safe...";
@@ -52,6 +53,8 @@ public class PostWaveMenu : MonoBehaviour
                 return $"Do Pilates:{System.Environment.NewLine}You feel more flexible just thinking about it!";
             case "HireCoworker":
                 return $"Hire a Coworker:{System.Environment.NewLine}He's a bit slow but he's trying";
+            case "BecomeAmbidextrous":
+                return $"Become Ambidextrous:{System.Environment.NewLine}Look ma, both hands!";
             default:
                 return $"Oops";
         }
@@ -82,11 +85,13 @@ public class PostWaveMenu : MonoBehaviour
     void DoubleSpeed()
     {
         PlayerStats.moveSpeed *= 2;
+        AlreadyUpgraded.Add("DoubleSpeed");
     }
 
     void DoubleJumpHeight()
     {
         PlayerStats.jumpHeight *= 2;
+        AlreadyUpgraded.Add("DoubleJumpHeight");
     }
 
     void OrderTablet()
@@ -102,7 +107,7 @@ public class PostWaveMenu : MonoBehaviour
 
     void DoPilates()
     {
-        //enable crouching under racks
+        PlayerStats.hasCrouch = true;
         AlreadyUpgraded.Add("DoPilates");
     }
 
@@ -110,6 +115,12 @@ public class PostWaveMenu : MonoBehaviour
     {
         //hire an AI coworker who brings items at the back to the front
         AlreadyUpgraded.Add("HireCoworker");
+    }
+
+    void BecomeAmbidextrous()
+    {
+        PlayerStats.hasTwoHands = true;
+        AlreadyUpgraded.Add("BecomeAmbidextrous");
     }
 
     void GoToPreWave()
